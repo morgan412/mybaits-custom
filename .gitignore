@@ -31,6 +31,4 @@ hs_err_pid*
 out
 gen
 .gitignore
-.idea/vcs.xml
-mybatis-demo/src/
-mybatis-framework-custom/src/
+target
