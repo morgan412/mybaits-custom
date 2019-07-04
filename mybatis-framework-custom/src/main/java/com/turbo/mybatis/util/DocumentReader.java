@@ -1,4 +1,4 @@
-package com.turbo.mybatis.session;
+package com.turbo.mybatis.util;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -9,14 +9,14 @@ import java.io.InputStream;
 /**
  * @author zouxq
  */
-class DocumentReader {
+public class DocumentReader {
 
     /**
      * 创建 Document 对象
      * @param inputStream 输入流
      * @return Document 对象
      */
-    static Document createDoument(InputStream inputStream) {
+    public static Document createDocument(InputStream inputStream) {
         Document document = null;
         try {
             document = new SAXReader().read(inputStream);

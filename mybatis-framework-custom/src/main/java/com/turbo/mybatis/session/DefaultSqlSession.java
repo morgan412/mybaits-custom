@@ -1,6 +1,7 @@
 package com.turbo.mybatis.session;
 
 import com.turbo.mybatis.config.Configuration;
+import com.turbo.mybatis.config.MappedStatement;
 import com.turbo.mybatis.executor.Executor;
 import com.turbo.mybatis.executor.SimpleExecutor;
 
@@ -21,14 +22,17 @@ public class DefaultSqlSession implements SqlSession {
 
     @Override
     public <T> T selectOne(String statementId, Object parameter) {
-        // TODO
+        List<T> list = selectList(statementId, parameter);
+        if (list.size() > 0) {
+            return list.get(0);
+        }
         return null;
     }
 
     @Override
     public <T> List<T> selectList(String statementId, Object parameter) {
-        // TODO
-        return null;
+        MappedStatement mappedStatement = configuration.getMappedStatement(statementId);
+        return executor.query(configuration, mappedStatement, parameter);
     }
 
     @Override

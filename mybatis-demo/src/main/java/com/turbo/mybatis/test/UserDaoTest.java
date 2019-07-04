@@ -5,7 +5,7 @@ import com.turbo.mybatis.dao.UserDaoImpl;
 import com.turbo.mybatis.pojo.User;
 import com.turbo.mybatis.session.SqlSessionFactory;
 import com.turbo.mybatis.session.SqlSessionFactoryBuilder;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -19,7 +19,7 @@ public class UserDaoTest {
 
     private UserDao userDao;
 
-    @BeforeAll
+    @BeforeEach
     public void init() {
         // 类加载器加载，指定类路径下的全局配置文件
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("SqlMapConfig.xml");
