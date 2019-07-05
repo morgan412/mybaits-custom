@@ -42,7 +42,7 @@ SqlSession 接口（CRUD 的方法）、DefaultSqlSession 实现类
 ## 配置文件如何编写？
 
 全局配置文件如何编写 (直接参考mybatis本身配置文件的编写)
-* 配置数据源 DataSource
+* 配置数据源DataSource
 * mapper 映射文件
 
 mapper 映射文件如何编写（配置SQL语句，一个SQL语句对应一个 statement 执行，每个statement都有一个唯一的id）
@@ -79,27 +79,25 @@ mapper 映射文件如何编写（配置SQL语句，一个SQL语句对应一个 
 * 通过MappedStatement 对象获取 statementType 类型
   * 如果是 preparedStatement。读取映射配置文件，获取要执行的SQL语句
     * 通过MappedStatement对象获取SQL语句（SQL语句的获取需要仔细处理）
-      SELECT * FROM user where id = #{id} and username = #{username}
-      SQL语句：SELECT * FROM user where id = ? and username= ?
+      `SELECT * FROM user where id = #{id} and username = #{username}`
+      SQL语句：`SELECT * FROM user where id = ? and username= ?`
     * 解析占位符参数：List\<ParameterMapping\>		
       ParameterMapping(参数名称)
       解析#{}中的参数名称：id
     * 给SQL语句设置参数
       遍历List\<ParameterMapping\>挨个处理入参
       获取入参的Java类型，根据类型（8种基本类型、String类型、POJO类型等）判断如何获取参数值
-    * 比如说如果是Integer类型，则只有将入参对象直接赋值给SQL语句即可
-      preparedStatement.setObject(1, "王五");
-    * 如果是POJO类型，通过反射根据参数名称获取POJO对象的属性值
-      preparedStatement.setObject(1, "王五");
+      * 比如说如果是Integer类型，则只有将入参对象直接赋值给SQL语句即可
+        preparedStatement.setObject(1, "王五");
+      * 如果是POJO类型，通过反射根据参数名称获取POJO对象的属性值
+        preparedStatement.setObject(1, "王五");
     * 执行 statement
       rs = preparedStatement.executeQuery();
     * 处理结果集
       获取要封装的java对象类型（Class对象）
-      通过MappedStatement对象获取结果映射的Java类型
-      遍历结果集，取出结果集中的每条结果的列名
-      通过rs获取metaData（列名）
-      根据列名通过反射获取java对象中的field名称
-      要求：SQL语句的列名一定要和java对象中的属性名称一致。
+      通过MappedStatement对象获取结果映射的Java类型，遍历结果集，取出结果集中的每条结果的列名
+      通过rs获取metaData（列名），根据列名通过反射获取java对象中的field名称
+      *这里简单处理：SQL语句的列名一定要和java对象中的属性名称一致，不做映射*
       通过反射给指定field赋值
 
 ## 配置文件如何解析？
@@ -121,7 +119,7 @@ dom4j --- 第三方
 
 ## 工厂对象如何创建？
 
-使用构建者模式创建 --- SqlSessionFactoryBuiler
+使用构建者模式创建 --- SqlSessionFactoryBuilder
 私人订制（）
 
 # 需求开发
